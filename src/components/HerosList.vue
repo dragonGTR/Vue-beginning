@@ -1,16 +1,30 @@
 <template>
-  <AppHeader />
-  <div>
-    <router-view></router-view>
+  <div style="text-align:center">
+    <h3>HERO LIST {{ herosCount }}</h3>
+    <ul style=" list-style-type:none">
+      <li style="none" v-for="(hero, index) in heroList" v-bind:key="index">
+        {{ hero.name }}
+        <button
+          style="marginLeft:40px"
+          id="sd"
+          @click="remove(index)"
+          class="btn-success mb-3"
+        >
+          X
+        </button>
+      </li>
+    </ul>
+    <form v-on:submit.prevent="addHero">
+      <input v-model="names" />
+      <button style="marginLeft:20px" type="submit" class="btn btn-primary">
+        ADD
+      </button>
+    </form>
   </div>
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader";
-
 export default {
-  components: { AppHeader },
-
   //computed is used to await for details filled
   computed: {
     herosCount() {
